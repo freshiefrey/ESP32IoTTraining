@@ -1,9 +1,10 @@
 #include <WiFi.h>
+#include <WiFiClient.h>
 #include <PubSubClient.h>
 
 const char* ssid     = "Tertiary Infotech";
 const char* password = "Tertiary888";
-const char* mqtt_server = "broker.mqtt-dashboard.com";
+const char* mqtt_server = "iot.eclipse.org";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -21,6 +22,7 @@ void setup() {
 void setup_wifi() {
 
   delay(10);
+  // We start by connecting to a WiFi network
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -76,6 +78,6 @@ void loop() {
     snprintf (msg, 75, "hello world #%ld", value);
     Serial.print("Publish message: ");
     Serial.println(msg);
-    client.publish("esp32/hello", msg);
+    client.publish("esp32/output", msg);
   }
 }

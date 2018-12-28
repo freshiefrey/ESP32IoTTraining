@@ -4,15 +4,16 @@
 #include <WiFiClient.h>
 #include <BlynkSimpleEsp32.h>
 
-char auth[] = "...";
+char auth[] = "....";
 
 char ssid[] = "Tertiary Infotech";
-char pass[] = "Tertiary 888";
+char pass[] = "Tertiary888";
 
 WidgetLED led1(V1);
 
 BlynkTimer timer;
 
+// V1 LED Widget is blinking
 void blinkLedWidget()
 {
   if (led1.getValue()) {
@@ -26,8 +27,14 @@ void blinkLedWidget()
 
 void setup()
 {
+  // Debug console
   Serial.begin(9600);
+
   Blynk.begin(auth, ssid, pass);
+  // You can also specify server:
+  //Blynk.begin(auth, ssid, pass, "blynk-cloud.com", 80);
+  //Blynk.begin(auth, ssid, pass, IPAddress(192,168,1,100), 8080);
+
   timer.setInterval(1000L, blinkLedWidget);
 }
 
